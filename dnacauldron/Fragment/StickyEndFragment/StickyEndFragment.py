@@ -144,11 +144,13 @@ class StickyEndFragment(Fragment):
             record.seq, enzyme, linear=linear
         )
         record_fragments = []
-        for fragment in fragments:
+        for i, fragment in enumerate(fragments):
+            fragment_id = f"{record.id}_frag_{i}"
+            fragment_name = f"{record.name}_frag_{i}"
             index = record.seq.upper().find(fragment)
             if index == -1:
                 continue
-
+            description = f"bases {index} to {index + len(fragment)} of {record.id}, produced by digestion with {enzyme}" 
             def only_parts_indicators(feature):
                 return feature.qualifiers.get("indicates_part", False)
 
@@ -162,6 +164,9 @@ class StickyEndFragment(Fragment):
                 seq=fragment,
                 features=subrecord.features,
                 annotations=subrecord.annotations,
+                name=fragment_name,
+                id=fragment_id,
+                description=description,
             )
             record_fragments.append(new_stickyend_record)
 
