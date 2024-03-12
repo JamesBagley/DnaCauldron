@@ -114,8 +114,8 @@ class PlotsMixin:
                     va="center",
                     color="#333333",
                     size=9,
-                    fontdict=dict(family="Inconsolata"),
-                )
+                    size=12
+        )
         text = "\n".join(
             ["Parts:"]
             + [
@@ -138,7 +138,7 @@ class PlotsMixin:
             text,
             va="center",
             transform=ax.transAxes,
-            fontdict=dict(size=12, family="Inconsolata"),
+            size=12
         )
         ax.set_aspect("equal")
         if self.name is not None:
